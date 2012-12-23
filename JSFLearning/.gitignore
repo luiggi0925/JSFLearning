@@ -1,0 +1,10 @@
+/.settings
+/.classpath
+/.project
+.metadata
+bin/**
+*.tmp
+*.bak
+*.swp
+tmp/**
+tmp/**/*

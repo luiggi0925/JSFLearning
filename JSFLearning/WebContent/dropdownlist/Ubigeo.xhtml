@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>DropDownList Multiple</title>
+</h:head>
+<body>
+	<h:form id="frmUbigeo">
+		<h:panelGrid columns="2">
+			<h:outputText value="Departamento" />
+			<h:selectOneMenu id="ddlDepartamento" value="#{ubigeoBean.idDepartamentoSelected}"
+				required="true" requiredMessage="Debe seleccionar un departamento.">
+				<f:selectItem itemLabel="Seleccione un dato" itemValue="#{null}" />
+				<f:selectItems value="#{ubigeoBean.mapDepartamento}" />
+				<f:ajax execute="@this" listener="#{ubigeoBean.selectDepartamento}"
+					render="ddlProvincia ddlDistrito" />
+			</h:selectOneMenu>
+
+			<h:outputText value="Provincia" />
+			<h:selectOneMenu id="ddlProvincia" value="#{ubigeoBean.idProvinciaSelected}"
+				required="true" requiredMessage="Debe seleccionar una provincia.">
+				<f:selectItem itemLabel="Seleccione un dato" itemValue="#{null}" />
+				<f:selectItems value="#{ubigeoBean.mapProvincia}" />
+				<f:ajax execute="@this" listener="#{ubigeoBean.selectProvincia}"
+					render="ddlDistrito" />
+			</h:selectOneMenu>
+
+			<h:outputText value="Distrito" />
+			<h:selectOneMenu id="ddlDistrito" value="#{ubigeoBean.idDistritoSelected}"
+				required="true" requiredMessage="Debe seleccionar un distrito.">
+				<f:selectItem itemLabel="Seleccione un dato" itemValue="#{null}" />
+				<f:selectItems value="#{ubigeoBean.mapDistrito}" />
+			</h:selectOneMenu>
+		</h:panelGrid>
+		<br />
+		<h:commandButton value="Seleccionar datos" action="#{ubigeoBean.showData}">
+			<f:ajax execute="@form" render=":pnlProcesado msjErrores" />
+		</h:commandButton>
+		<br />
+		<h:messages id="msjErrores" style="color:red;margin:8px;" />
+		<br />
+	</h:form>
+	<h:panelGrid id="pnlProcesado">
+		<h:outputText rendered="#{ubigeoBean.procesado}" value="Datos Seleccionados:" />
+		<h:panelGrid columns="3" rendered="#{ubigeoBean.procesado}">
+			<h:outputText value="Departamento:" />
+			<h:outputText value="#{ubigeoBean.departamentoSelected.id}" />
+			<h:outputText value="#{ubigeoBean.departamentoSelected.nombreCorto}" />
+	
+			<h:outputText value="Provincia:" />
+			<h:outputText value="#{ubigeoBean.provinciaSelected.id}" />
+			<h:outputText value="#{ubigeoBean.provinciaSelected.nombreCorto}" />
+	
+			<h:outputText value="Distrito:" />
+			<h:outputText value="#{ubigeoBean.distritoSelected.id}" />
+			<h:outputText value="#{ubigeoBean.distritoSelected.nombreCorto}" />
+		</h:panelGrid>
+	</h:panelGrid>
+</body>
+</html>

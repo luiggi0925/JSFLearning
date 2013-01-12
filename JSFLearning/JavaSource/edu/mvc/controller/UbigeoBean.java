@@ -1,4 +1,4 @@
-package edu.mv.controller;
+package edu.mvc.controller;
 
 import java.io.Serializable;
 import java.util.List;
